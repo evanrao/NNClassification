@@ -16,8 +16,8 @@ def log_normalization(data):
     nordata = np.zeros((rownum, colnum))
     for i in range(0, colnum):
         tempi = np.log10(data[0:rownum,i])
-        tempi = (tempi - np.min(tempi)) / (np.max(tempi) - np.min(tempi));
-        nordata[0:rownum,i] = tempi;
+        tempi = (tempi - np.min(tempi)) / (np.max(tempi) - np.min(tempi))
+        nordata[0:rownum,i] = tempi
     return nordata
 
 #The mat data files are converted to npy files
