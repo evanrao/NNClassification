@@ -21,6 +21,7 @@ def log_normalization(data):
         #print ('-----------'+ '%d' %i + '-----------')
     return nordata
 
+#The mat data files are converted to npy files
 def mattonpz(srcname,srckey,outname):
     in_d = io.loadmat(srcname)
     oct_a = in_d[srckey]
