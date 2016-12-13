@@ -146,6 +146,13 @@ if __name__ == '__main__':
 
         epoch += 1
     """To be continued ...
-    do the back of the model data preservation
-    and classification calculation function
+    classification calculation function
     """
+    if epoch < epo:     #The fit ends and the model parameters are saved if the error reaches the expected value
+        print 'The fit is as expected and the model parameters are saved...'
+        np.save('./mdata/rherror.npy',error)
+        np.save('./mdata/rhc1.npy', c1)
+        np.save('./mdata/rhsigma1.npy', sigma1)
+        np.save('./mdata/rhwf_wnn.npy', wf_wnn)
+        np.save('./mdata/rhc1_wnn.npy', c1_wnn)
+        np.save('./mdata/rhsigma1_wnn.npy', sigma1_wnn)
