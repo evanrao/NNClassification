@@ -1,3 +1,4 @@
+from __future__ import division
 import math,copy,os,matstorage
 import numpy as np
 from neural import Neural
