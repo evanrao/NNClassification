@@ -20,6 +20,14 @@ def log_normalization(data):
         nordata[0:rownum,i] = tempi
     return nordata
 
+def normalization(data):
+    colnum = len(data[0])
+    rownum = len(data)
+    nordata = np.zeros((rownum, colnum))
+    for i in range(0, colnum):
+        nordata[0:rownum,i] = (data[0:rownum,i] - np.min(data[0:rownum,i])) / (np.max(data[0:rownum,i]) - np.min(data[0:rownum,i]))
+    return nordata
+
 #The mat data files are converted to npy files
 def mattonpz(srcname,srckey,outname):
     in_d = io.loadmat(srcname)
