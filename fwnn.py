@@ -111,7 +111,7 @@ if __name__ == '__main__':
             for j in range(0, nn.Hi):
                 for i in range(0, nn.Xi):
                     tempwnnz = ((innor[si, i] - c1_wnn[i, j]) / sigma1_wnn[i, j]) ** 2
-                    outWnnXi[i, j] = wf_wnn[i, j] * (abs(sigma1_wnn[i, j]) ** (-1 / 2)) * (1 - tempwnnz) * math.exp(-0.5 * tempwnnz);
+                    outWnnXi[i, j] = wf_wnn[i, j] * (abs(sigma1_wnn[i, j]) ** (-1 / 2)) * (1 - tempwnnz) * math.exp(-0.5 * tempwnnz)
                 outWnn[0,j] = np.sum(outWnnXi[0:len(outWnnXi), j])
             # Compute layer 4
             for j in range(0, nn.Hi):
