@@ -19,7 +19,7 @@ c1_wnn=np.ones((nn.Xi,nn.Hi))
 sigma1_wnn=np.ones((nn.Xi,nn.Hi))
 
 innor = matstorage.log_normalization(insrc)
-tgnor = matstorage.log_normalization(tgsrc)
+tgnor = matstorage.normalization(tgsrc)
 
 for i in range(0, nn.Xi):
     maxXi=np.max(innor[0:nn.Si,i])
