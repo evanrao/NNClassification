@@ -9,6 +9,3 @@ class Neural:
         self.Hi = self.Ui ** self.Xi
         self.Oi = oi # The number of output nodes
 
-if __name__ == '__main__':
-    neural = Neural(53,7,2,1)
-    print(neural.__dict__)    #Prints a collection of parameters
