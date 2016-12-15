@@ -86,12 +86,12 @@ if __name__ == '__main__':
             delsigma1_wnn = np.ones((nn.Xi, nn.Hi))
 
             outLayer5 = np.zeros((nn.Si, 1))
-            # Compute layer 1
+            
             for i in range(0, nn.Xi):
                 for u in range(0, nn.Ui):
                     # Set the membership function
                     outLayer1[i, u] = math.exp(-0.5 * ((innor[si, i] - c1[i, u]) ** 2 / sigma1[i, u]) ** 2)
-            # Compute layer 2, using recursive computation  W(u)=Ui(X1)*Ui(X2)*Ui(X3)*Ui(X4)
+            
             if (nn.Hi == nn.Ui):
                 for j in range(0, nn.Hi):
                     wf[j] = 1
@@ -101,29 +101,28 @@ if __name__ == '__main__':
             else:
                 anfiswfsum(0, outLayer1, 1, np.zeros((1,nn.Xi)))
                 wf = copy.deepcopy(global_wf)
-            # Compute layer 3 - the third layer of F
+            
             if np.sum(wf[0,0:len(wf[0])]) != 0:
                 for j in range(0, nn.Hi):
                     wfDraw[0, j] = wf[0, j] / np.sum(wf[0,0:len(wf[0])])
             else:
                 print ('sum(wf(0,:))=0 Of the error, exit the system!')
                 os._exit()
-            # Compute layer 3 - the third layer of W
+            
             for j in range(0, nn.Hi):
                 for i in range(0, nn.Xi):
                     tempwnnz = ((innor[si, i] - c1_wnn[i, j]) / sigma1_wnn[i, j]) ** 2
                     outWnnXi[i, j] = wf_wnn[i, j] * (abs(sigma1_wnn[i, j]) ** (-1 / 2)) * (1 - tempwnnz) * math.exp(-0.5 * tempwnnz)
                 outWnn[0,j] = np.sum(outWnnXi[0:len(outWnnXi), j])
-            # Compute layer 4
+            
             for j in range(0, nn.Hi):
                 outLayer4[0, j] = wfDraw[0, j] * outWnn[0,j]
-            # Compute layer 5
+            
 
             outLayer5[si, 0] = np.sum(outLayer4[0,0:len(outLayer4[0])])
             errorpn = (outLayer5[si, 0] - tgnor[si,0])
             error += (abs(tgnor[si,0] - outLayer5[si, 0])) ** 2
-            # Directly start the least squares method of multiple linear regression, calculate the optimal value of P, only once
-            # Gradient algorithm, the reverse calculation, layer 4 of the incremental adjustment
+            
             for j in range(0, nn.Hi):
                 deLayer3Wnn[0, j] = errorpn * wfDraw[0, j]
                 deLayer3[0,j] = errorpn * outWnn[0,j]
