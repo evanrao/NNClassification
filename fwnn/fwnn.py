@@ -8,7 +8,7 @@ global global_wf,theHi,wf_Hi_Xi_Ui
 insrc = matstorage.dataload('in_data.npy')
 tgsrc = matstorage.dataload('tg_data.npy')
 
-nn = Neural(len(insrc),len(insrc[0]),2,1)
+nn = Neural(insrc.shape[0],insrc.shape[1],2,1)
 global_wf = [[1] * nn.Hi] * 1 # or use np.ones((1, nn.Hi))
 theHi=0
 wf_Hi_Xi_Ui= [[0] * nn.Xi] * nn.Hi
@@ -29,14 +29,14 @@ for i in range(0, nn.Xi):
     sigma1_wnn[i,0:nn.Hi]=sigma1_wnn[i,0:nn.Hi] * 0.2 * (maxXi-minXi)
 
 eta=0.1
-epo=1000 #The end of the cycle, the maximum number of training
-epoch=1 #The starting point of the loop
-error=0.1 #Initialization error square sum
-err=0.0001 #The sum of the square of the expected errors
-errorpn=1 #Error counter for individual samples
+epo=1000 # The end of the cycle, the maximum number of training
+epoch=1 # The starting point of the loop
+error=0.1 # Initialization error square sum
+err=0.0001 # The sum of the square of the expected errors
+errorpn=1 # Error counter for individual samples
 
 
-Err_NetOut2Show=[]  #Error history data set
+Err_NetOut2Show=[]  # Error history data set
 
 def anfiswfsum(theXi,outLayer1,beforeValue,beforeMat):
     """
@@ -45,22 +45,22 @@ def anfiswfsum(theXi,outLayer1,beforeValue,beforeMat):
     """
     global theHi,global_wf,wf_Hi_Xi_Ui
     for u in range(0, nn.Ui):
-        if (theHi <= nn.Hi-1):
+        if theHi <= nn.Hi-1:
             afterValue = beforeValue * outLayer1[theXi, u]
             afterMat = beforeMat
             afterMat[0,theXi] = u
-            if (theXi == nn.Xi-1):
+            if theXi == nn.Xi-1:
                 global_wf[0,theHi] = afterValue
                 wf_Hi_Xi_Ui[theHi,0:len(wf_Hi_Xi_Ui[0])]=afterMat
-                theHi = theHi + 1
-        if (theHi <= nn.Hi-1):
+                theHi += 1
+        if theHi <= nn.Hi-1:
             if theXi < nn.Xi-1:
                 anfiswfsum(theXi +1, outLayer1, afterValue, afterMat)
 
 if __name__ == '__main__':
     print ('FWNN Training Start...........................')
     # Start the training sample
-    while (error>err and epoch<=epo):
+    while error>err and epoch<=epo:
         error = 0
         for si in range(0, nn.Si):
             #Reinitialize the data
@@ -86,13 +86,13 @@ if __name__ == '__main__':
             delsigma1_wnn = np.ones((nn.Xi, nn.Hi))
 
             outLayer5 = np.zeros((nn.Si, 1))
-            
+
+            # Set the membership function
             for i in range(0, nn.Xi):
                 for u in range(0, nn.Ui):
-                    # Set the membership function
                     outLayer1[i, u] = math.exp(-0.5 * ((innor[si, i] - c1[i, u]) ** 2 / sigma1[i, u]) ** 2)
             
-            if (nn.Hi == nn.Ui):
+            if nn.Hi == nn.Ui:
                 for j in range(0, nn.Hi):
                     wf[j] = 1
                     for i in range(0, nn.Xi):
@@ -107,8 +107,8 @@ if __name__ == '__main__':
                     wfDraw[0, j] = wf[0, j] / np.sum(wf[0,0:len(wf[0])])
             else:
                 print ('sum(wf(0,:))=0 Of the error, exit the system!')
-                os._exit()
-            
+                os._exit(0)
+
             for j in range(0, nn.Hi):
                 for i in range(0, nn.Xi):
                     tempwnnz = ((innor[si, i] - c1_wnn[i, j]) / sigma1_wnn[i, j]) ** 2
