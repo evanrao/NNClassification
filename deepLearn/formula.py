@@ -2,6 +2,7 @@ from __future__ import division
 import math
 import numpy as np
 
+
 def sigm(data):
     return 1. / (1 + np.exp(-data))
 
