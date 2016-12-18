@@ -66,4 +66,4 @@ if __name__ == '__main__':
         print('%d' % i + ',State change:Error=' '%f' % eq + ',Learning rate=' + '%f' % nn.lrate)
 
     nn = checkmodel(nn, insrc, filesrc, yvar)
-    print('DeepLearn Trainning ...............End!')
+    print('DeepLearn Trainning ..............End!')
