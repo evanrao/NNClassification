@@ -1,5 +1,5 @@
 # NNReserve
-The NNReserve is a technique of classifying, controlling and predicting using neural networks. At present, it provides FWNN (Fuzzy Wavelet Neural Network) algorithm model, test cases and sample data, and the present version has not added nonlinear principal component analysis Of the algorithm. Compared with the depth learning algorithm, FWNN is a relatively easy to learn and learn neural network algorithm.
+NNReserve is a technique for classifying, controlling, and predicting neural networks, including the implementation of algorithms and other open source algorithms, and its purpose is to learn and apply. Currently, it provides depth learning and FWNN (Fuzzy Wavelet Neural Network) algorithm models, test cases and sample data, and the current version does not add nonlinear principal component analysis to the algorithm.
 
 # Development environment
 OS:Ubuntu 14.04
