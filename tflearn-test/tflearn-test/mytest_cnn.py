@@ -49,7 +49,7 @@ network = dropout(network, 0.8)
 network = fully_connected(network, 10, activation='softmax')
 network = regression(network, optimizer='adam', learning_rate=0.01,
                      loss='categorical_crossentropy', name='target')
-# fix ----AttributeError: 'module' object has no attribute 'GraphKeys'---------
+# fix ----AttributeError: 'module' object has no attribute 'GraphKeys'------
 col = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
 for x in col:
     tf.add_to_collection(tf.GraphKeys.VARIABLES, x )
