@@ -7,5 +7,3 @@ OS:Ubuntu 14.04
 language version:Python 2.7.6
 
 # Description
-deepLearningTutorials-DBN-test
-using https://github.com/lisa-lab/DeepLearningTutorials algorithm to 1D cluster test
